@@ -25,7 +25,7 @@ let package = Package(
         .target(
             name: "DataDomeAlamofire",
             dependencies: ["Alamofire"],
-            path: "Source"
+            path: "Sources"
         )
     ],
     swiftLanguageVersions: [.v5]
