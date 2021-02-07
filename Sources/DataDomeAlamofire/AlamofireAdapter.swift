@@ -44,12 +44,13 @@ open class AlamofireAdapter: DataDomeAdapter {
             return
         }
         
-        // Cache the callback to conform t@objc o the standard validation workflow
+        // Cache the callback to conform to the standard validation workflow
         let callback = Callback(request: urlRequest, task: urlTask, session: urlSession)
         CacheManager.shared.cache(callback: callback)
         
         // Cache the completion handler
-        self.completions[urlTask.uniqueIdentifier()] = completion
+        let identifier = urlTask.uniqueIdentifier()
+        self.completions[identifier] = completion
         
         let data = (request as? Alamofire.DataRequest)?.data
         let response = urlTask.response
@@ -115,10 +116,10 @@ extension AlamofireAdapter: FilterDelegate {
     open func filter(task: URLSessionTask, didFailWith error: Error) {
         let identifier = task.uniqueIdentifier()
         let completion = self.completions[identifier]
-        self.completions.removeValue(forKey: identifier)
         
         // Do not retry the request since it failed with an error
         completion?(.doNotRetryWithError(error))
+        //self.completions.removeValue(forKey: identifier)
     }
     
     /// Called when a captcha is validated. Several requests are queued and need to be retried
