@@ -119,7 +119,6 @@ extension AlamofireAdapter: FilterDelegate {
         
         // Do not retry the request since it failed with an error
         completion?(.doNotRetryWithError(error))
-        //self.completions.removeValue(forKey: identifier)
     }
     
     /// Called when a captcha is validated. Several requests are queued and need to be retried
