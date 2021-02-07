@@ -17,7 +17,6 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/DataDome/datadome-ios-package.git", from: "2.5.5"),
         .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.0.0")
     ],
     targets: [
@@ -25,7 +24,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "DataDomeAlamofire",
-            dependencies: ["Alamofire", "DataDomeSDK"],
+            dependencies: ["Alamofire"],
             path: "Source"
         )
     ],
