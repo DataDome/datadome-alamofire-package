@@ -21,10 +21,9 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .binaryTarget(
+        .target(
             name: "DataDomeAlamofire",
-            url: "https://package.datadome.co/ios/DataDomeAlamofire-2.5.5.zip",
-            checksum: "14bc8dcbaf814dac1c1ed3eb2d20c7a74d3817f43bab2266acce8af9d013bc5e"
+            dependencies: ["DataDomeSDK"]
         )
     ]
 )
