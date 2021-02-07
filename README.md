@@ -11,6 +11,7 @@ The DataDomeAlamofire SDK is available on [Swift Package Manager](https://swift.
 1. In Xcode > File > Swift Packages > Add Package Dependency, select your target in which to integrate DataDomeAlamofire.
 2. Paste the following git url in the search bar `https://github.com/DataDome/datadome-alamofire-package`
 3. Select `DataDomeAlamofire` and press `Add`.
+4. Add the DataDomeSDK dependency by following instructions in [this documentation](https://docs.datadome.co/docs/datadome-ios-sdk-20-and-earlier).
 
 
 
