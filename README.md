@@ -11,7 +11,7 @@ The DataDomeAlamofire SDK is available on [Swift Package Manager](https://swift.
 1. In Xcode > File > Swift Packages > Add Package Dependency, select your target in which to integrate DataDomeAlamofire.
 2. Paste the following git url in the search bar `https://github.com/DataDome/datadome-alamofire-package`
 3. Select `DataDomeAlamofire` and press `Add`.
-4. Add the DataDomeSDK dependency by following instructions in [this documentation](https://docs.datadome.co/docs/datadome-ios-sdk-20-and-earlier).
+
 
 
 
@@ -99,6 +99,37 @@ let alamofireSessionManager = Session(configuration: configuration,
 ```
 
 The rest of your app won't change. Only make sure to use the created alamofireSessionManager to perform your requests.
+
+Alternatively, you can conform to the CaptchaDelegate protocol and handle manually the navigation of the Captcha View Controller
+
+```swift
+let dataDome = AlamofireInterceptor(captchaDelegate: self)
+```
+
+Implement the CaptchaDelegate protocol
+
+```swift
+
+import DataDomeSDK
+
+extension AlamofireViewController: CaptchaDelegate {
+    func present(captchaController controller: UIViewController) {
+        present(controller, animated: true) {
+            print("Captcha displayed")
+        }
+    }
+    
+    func dismiss(captchaController controller: UIViewController) {
+        controller.dismiss(animated: true) {
+            print("Captcha dismissed")
+        }
+    } 
+}
+
+```
+
+
+
 
 ####Important
 When using Alamofire, make sure you call .validate() for each request to make sure Alamofire does call the retry function and hands the execution to the DataDome SDK in case of a 403 response with a Captcha Challenge.
