@@ -12,4 +12,6 @@ import DataDomeSDK
 
 public protocol DataDomeAdapter: Alamofire.RequestAdapter {
     func validate(filter: ResponseFilter)
+    
+    var captchaDelegate: CaptchaDelegate? { get set }
 }

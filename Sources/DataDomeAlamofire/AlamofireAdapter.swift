@@ -15,6 +15,7 @@ private typealias AlamofireCompletion = (Alamofire.RetryResult) -> Void
 
 /// DataDome plugin integration using Alamofire request Adapter/Retrier
 open class AlamofireAdapter: DataDomeAdapter {
+    public weak var captchaDelegate: CaptchaDelegate?
     
     public required init() {
     }
@@ -56,7 +57,14 @@ open class AlamofireAdapter: DataDomeAdapter {
         let data = (request as? Alamofire.DataRequest)?.data
         let response = urlTask.response
         let prototype = CompletionPrototype(data: data, response: response, error: error)
-        let filter = ResponseFilter(request: requestable, session: urlSession, prototype: prototype, filterDelegate: self)
+        let filter = ResponseFilter(
+            request: requestable,
+            session: urlSession,
+            prototype: prototype,
+            filterDelegate: self,
+            captchaDelegate: captchaDelegate
+        )
+        
         self.validate(filter: filter)
     }
     

@@ -8,13 +8,15 @@
 
 import Foundation
 import Alamofire
+import DataDomeSDK
 
 open class AlamofireInterceptor<T: AlamofireAdapter> {
     public let proxy: T
-    public private(set) lazy var sessionAdapter: RequestAdapter = proxy
+    public private(set) lazy var sessionAdapter: DataDomeAdapter = proxy
     public private(set) lazy var sessionRetrier: RequestRetrier = proxy
-    
-    public init() {
+        
+    public init(captchaDelegate: CaptchaDelegate? = nil) {
         self.proxy = T()
+        self.sessionAdapter.captchaDelegate = captchaDelegate
     }
 }
