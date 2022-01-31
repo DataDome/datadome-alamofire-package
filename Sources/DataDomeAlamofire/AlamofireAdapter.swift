@@ -108,6 +108,9 @@ extension AlamofireAdapter: FilterDelegate {
         
         // Do not retry this request, it should be ignored
         completion?(.doNotRetry)
+        
+        // Send the event tracker
+        EventTracker.shared.log(request: request, integrationMode: .alamofire)
     }
     
     /// Called when a request failed with an actual error.
