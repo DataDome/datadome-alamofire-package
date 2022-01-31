@@ -1,4 +1,4 @@
-# DataDome Alamaofire Integration
+# DataDome Alamofire Integration
 
 [![Version](https://img.shields.io/cocoapods/v/DataDomeAlamofire.svg?style=flat)](http://cocoapods.org/pods/DataDomeAlamofire)
 [![License](https://img.shields.io/cocoapods/l/DataDomeAlamofire.svg?style=flat)](http://cocoapods.org/pods/DataDomAlamofire)
