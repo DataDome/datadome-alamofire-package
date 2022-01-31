@@ -87,6 +87,11 @@ extension AlamofireAdapter: RequestRetrier {
             request.addValue(header, forHTTPHeaderField: "User-Agent")
         }
         
+        // If accept header is empty
+        if request.value(forHTTPHeaderField: "Accept") == nil {
+            request.setValue("application/json", forHTTPHeaderField: "Accept")
+        }
+        
         return completion(.success(request))
     }
 }
@@ -136,8 +141,5 @@ extension AlamofireAdapter: FilterDelegate {
         
         // Retry the request since the captcha is validated and a new cookie is generated
         completion?(.retry)
-        
-        //Send the event tracker
-        EventTracker.shared.log(request: request, integrationMode: .alamofire)
     }
 }
