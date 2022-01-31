@@ -141,5 +141,8 @@ extension AlamofireAdapter: FilterDelegate {
         
         // Retry the request since the captcha is validated and a new cookie is generated
         completion?(.retry)
+        
+        // Send the event tracker
+        EventTracker.shared.log(request: request, integrationMode: .alamofire)
     }
 }
