@@ -139,10 +139,13 @@ extension AlamofireAdapter: FilterDelegate {
     ///   - request: The original request
     ///   - cookie: The generated cookie
     public func filter(request: Requestable, didResolveCaptcha cookie: String) {
+//        Logger.info("Did resolve captcha with new cookie '\(cookie)'", for: .core)
         EventTracker.shared.log(.captchaSuccess)
     }
     
     public func shouldRetry(request: Requestable) {
+//        Logger.info("Retrying failed request \(request.url?.absoluteString ?? "")", for: .core)
+
         let identifier = request.uniqueIdentifier()
         let completion = self.completions[identifier]
         self.completions.removeValue(forKey: identifier)
