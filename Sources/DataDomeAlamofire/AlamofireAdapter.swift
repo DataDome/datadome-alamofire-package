@@ -96,7 +96,7 @@ extension AlamofireAdapter: RequestRetrier {
         }
         
         // If accept header is empty
-        if request.value(forHTTPHeaderField: "Accept") == nil {
+        if request.value(forHTTPHeaderField: "Accept") == nil && DataDomeSDK.bypassHTTPAccept == false {
             request.setValue("application/json", forHTTPHeaderField: "Accept")
         }
         
