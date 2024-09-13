@@ -95,11 +95,6 @@ extension AlamofireAdapter: RequestRetrier {
             request.addValue(header, forHTTPHeaderField: "User-Agent")
         }
         
-        // If accept header is empty
-        if request.value(forHTTPHeaderField: "Accept") == nil && DataDomeSDK.bypassHTTPAccept == false {
-            request.setValue("application/json", forHTTPHeaderField: "Accept")
-        }
-        
         return completion(.success(request))
     }
 }
