@@ -1,0 +1,27 @@
+PODS:
+  - Alamofire (5.10.1)
+  - DataDomeAlamofire (3.6.1):
+    - Alamofire (~> 5.0)
+    - DataDomeSDK (~> 3.0)
+  - DataDomeSDK (3.6.1)
+
+DEPENDENCIES:
+  - DataDomeAlamofire (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - DataDomeSDK
+
+EXTERNAL SOURCES:
+  DataDomeAlamofire:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: 840d2a1ad82355b536ec6ba5f97e5bfa54600ca3
+  DataDomeAlamofire: c12da87b8eecf3de447af2d6612e02e95768e5c7
+  DataDomeSDK: 685530a25cc751455f840fa8ac1910e838bf5cb1
+
+PODFILE CHECKSUM: d9761b9c7cc4112d7bf42e0642146b8a71d09eaa
+
+COCOAPODS: 1.16.1
