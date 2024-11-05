@@ -9,17 +9,15 @@
 import Foundation
 import UIKit
 import Alamofire
-import DataDomeSDK
+@preconcurrency import DataDomeSDK
 
 private typealias AlamofireCompletion = (Alamofire.RetryResult) -> Void
 
 /// DataDome plugin integration using Alamofire request Adapter/Retrier
-open class AlamofireAdapter: DataDomeAdapter {
+public class AlamofireAdapter: DataDomeAdapter, @unchecked Sendable {
     public weak var captchaDelegate: CaptchaDelegate?
     
-    public required init() {
-    }
-    
+    public required init() { }
     
     // MARK: - RequestRetrier
     
@@ -87,15 +85,7 @@ extension AlamofireAdapter: RequestRetrier {
     public func adapt(_ urlRequest: URLRequest,
                       for session: Alamofire.Session,
                       completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        
-        var request = urlRequest
-        
-        // Add custom user agent if specified in environment variable for debug purposes
-        if let header = ProcessInfo().environment["DATADOME_USER_AGENT"] {
-            request.addValue(header, forHTTPHeaderField: "User-Agent")
-        }
-        
-        return completion(.success(request))
+        return completion(.success(urlRequest))
     }
 }
 
