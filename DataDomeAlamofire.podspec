@@ -14,5 +14,5 @@ Pod::Spec.new do |spec|
   spec.source_files = "Sources/DataDomeAlamofire"
 
   spec.dependency "Alamofire", "~> 5.0"
-  spec.dependency 'DataDomeSDK', "~> 3.0"
+  spec.dependency 'DataDomeSDK', "~> 3.6"
 end
