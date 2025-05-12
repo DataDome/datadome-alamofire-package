@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name     = "DataDomeAlamofire"
-  spec.version  = "3.7.0"
+  spec.version  = "3.8.0"
   spec.summary  = "A DataDome plugin for Alamofire integration."
   spec.homepage = "https://datadome.co"
   spec.license  = { :type => 'MIT', :file => 'LICENSE' }
@@ -14,5 +14,5 @@ Pod::Spec.new do |spec|
   spec.source_files = "Sources/DataDomeAlamofire"
 
   spec.dependency "Alamofire", "~> 5.0"
-  spec.dependency 'DataDomeSDK', "~> 3.7"
+  spec.dependency 'DataDomeSDK', "~> 3.8"
 end
