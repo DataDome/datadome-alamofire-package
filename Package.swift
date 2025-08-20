@@ -15,7 +15,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.0.0"),
-        .package(name: "DataDomeSDK", url: "https://github.com/DataDome/datadome-ios-package", from: Version(3, 8, 3))
+        .package(name: "DataDomeSDK", url: "https://github.com/DataDome/datadome-ios-package", from: Version(3, 8, 4))
     ],
     targets: [
         .target(
