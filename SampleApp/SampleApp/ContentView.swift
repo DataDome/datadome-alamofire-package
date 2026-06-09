@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@MainActor
 final class ResquetsViewModel: ObservableObject {
     var networkManager: NetworkManager = .shared
     

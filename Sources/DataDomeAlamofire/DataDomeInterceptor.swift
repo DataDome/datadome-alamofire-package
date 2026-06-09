@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-@preconcurrency import CoreDataDome
+import CoreDataDome
 
 /// DataDome integration for Alamofire.
 ///
@@ -24,7 +24,7 @@ import Alamofire
 /// let interceptor = DataDomeInterceptor(dataDome: dataDome)
 /// session.request(url, interceptor: interceptor)
 /// ```
-public final class DataDomeInterceptor: RequestInterceptor, @unchecked Sendable {
+public final class DataDomeInterceptor: RequestInterceptor, Sendable {
     /// The CoreDataDome SDK instance used to validate responses.
     private let dataDome: DataDome
 
@@ -43,7 +43,7 @@ public final class DataDomeInterceptor: RequestInterceptor, @unchecked Sendable 
     ///   - completion: The completion handler.
     public func adapt(_ urlRequest: URLRequest,
                       for session: Session,
-                      completion: @escaping (Result<URLRequest, Error>) -> Void) {
+                      completion: @escaping @Sendable (Result<URLRequest, Error>) -> Void) {
         completion(.success(urlRequest))
     }
 
@@ -59,16 +59,17 @@ public final class DataDomeInterceptor: RequestInterceptor, @unchecked Sendable 
     public func retry(_ request: Request,
                       for session: Session,
                       dueTo error: Error,
-                      completion: @escaping (RetryResult) -> Void) {
+                      completion: @escaping @Sendable (RetryResult) -> Void) {
         guard let url = request.request?.url,
-              let httpResponse = request.task?.response as? HTTPURLResponse else {
+              let httpResponse = request.response else {
             completion(.doNotRetry)
             return
         }
 
         let body = (request as? DataRequest)?.data
+        let headers = (httpResponse.allHeaderFields as? [String: String]) ?? [:]
         let ddResponse = DataDomeResponse(statusCode: httpResponse.statusCode,
-                                          headers: httpResponse.allHeaderFields as [AnyHashable: Sendable],
+                                          headers: headers,
                                           body: body)
 
         let dataDome = self.dataDome

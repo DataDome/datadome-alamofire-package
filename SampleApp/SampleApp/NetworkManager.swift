@@ -15,8 +15,8 @@ enum NetworkManagerError: Error {
     case unknowned
 }
 
-final class NetworkManager {
-    static var shared: NetworkManager = NetworkManager()
+final class NetworkManager: Sendable {
+    static let shared = NetworkManager()
 
     private let alamofireSession = Alamofire.Session(configuration:  URLSessionConfiguration.default)
     private let dataDome: DataDome
