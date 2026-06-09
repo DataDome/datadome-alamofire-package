@@ -2,7 +2,6 @@
 //  DataDomeInterceptor.swift
 //  DataDomeAlamofire
 //
-//  Created by Cyril Bosselut on 05/05/2020.
 //  Copyright © 2020 DataDome. All rights reserved.
 //
 
