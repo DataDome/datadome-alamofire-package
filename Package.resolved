@@ -11,12 +11,12 @@
         }
       },
       {
-        "package": "DataDomeSDK",
-        "repositoryURL": "https://github.com/DataDome/datadome-ios-package",
+        "package": "CoreDataDome",
+        "repositoryURL": "git@github.com:DataDome/mobile-package-ios-coredatadome.git",
         "state": {
           "branch": null,
-          "revision": "9eafb6ca67a9c6258a090a9d5c4be44cb3108599",
-          "version": "3.8.5"
+          "revision": "6e6233cf193d00f392668a72066caf979bbaf6a1",
+          "version": "0.6.0"
         }
       }
     ]
