@@ -35,7 +35,13 @@ public final class DataDomeInterceptor: RequestInterceptor, Sendable {
 
     // MARK: - RequestAdapter
 
-    /// Called before the request is fired. The request is forwarded unchanged.
+    /// Called before the request is fired.
+    ///
+    /// - If the request carries no `Cookie` header (or has no URL), it is forwarded unchanged.
+    /// - Otherwise the current DataDome cookie is fetched from the SDK and merged into the header:
+    ///   an existing DataDome entry has its value replaced in place, otherwise the cookie is appended.
+    ///   All other cookies are preserved in their original order. When the SDK has no cookie yet, the
+    ///   request is forwarded unchanged.
     /// - Parameters:
     ///   - urlRequest: The request about to be sent.
     ///   - session: The session firing the request.
@@ -43,7 +49,58 @@ public final class DataDomeInterceptor: RequestInterceptor, Sendable {
     public func adapt(_ urlRequest: URLRequest,
                       for session: Session,
                       completion: @escaping @Sendable (Result<URLRequest, Error>) -> Void) {
-        completion(.success(urlRequest))
+        // Foundation header lookup is case-insensitive.
+        guard let cookieHeader = urlRequest.value(forHTTPHeaderField: "Cookie"),
+              let url = urlRequest.url else {
+            completion(.success(urlRequest))
+            return
+        }
+
+        Task {
+            guard let cookie = await self.dataDome.getCookie(forURL: url) else {
+                // SDK has no cookie yet: leave the caller's Cookie header untouched.
+                completion(.success(urlRequest))
+                return
+            }
+
+            var modifiedRequest = urlRequest
+            let merged = Self.mergeCookie(into: cookieHeader, name: cookie.name, value: cookie.value)
+            modifiedRequest.setValue(merged, forHTTPHeaderField: "Cookie")
+            completion(.success(modifiedRequest))
+        }
+    }
+
+    /// Merges a single cookie into an existing `Cookie` header value.
+    ///
+    /// Cookies are matched by exact name (the token before the first `=`), so a name that is a prefix
+    /// of another (e.g. `datadome` vs `datadome_x`) is not mistaken for a match. An existing entry has
+    /// its value replaced in place, preserving order; otherwise the cookie is appended.
+    /// - Parameters:
+    ///   - header: The original `Cookie` header value, e.g. `"a=1; datadome=old; b=2"`.
+    ///   - name: The cookie name to merge.
+    ///   - value: The new value for that cookie.
+    /// - Returns: The rebuilt `Cookie` header value, e.g. `"a=1; datadome=new; b=2"`.
+    static func mergeCookie(into header: String, name: String, value: String) -> String {
+        var pairs: [(name: String, value: String)] = header
+            .split(separator: ";")
+            .compactMap { segment in
+                let trimmed = segment.trimmingCharacters(in: .whitespaces)
+                guard !trimmed.isEmpty else { return nil }
+                if let eq = trimmed.firstIndex(of: "=") {
+                    let key = String(trimmed[trimmed.startIndex..<eq]).trimmingCharacters(in: .whitespaces)
+                    let val = String(trimmed[trimmed.index(after: eq)...])
+                    return (key, val)
+                }
+                return (trimmed, "")
+            }
+
+        if let idx = pairs.firstIndex(where: { $0.name == name }) {
+            pairs[idx].value = value
+        } else {
+            pairs.append((name, value))
+        }
+
+        return pairs.map { "\($0.name)=\($0.value)" }.joined(separator: "; ")
     }
 
     // MARK: - RequestRetrier
