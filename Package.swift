@@ -15,7 +15,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.0.0"),
-        .package(url: "git@github.com:DataDome/mobile-package-ios-coredatadome.git", from: Version(0, 6, 0))
+        .package(url: "git@github.com:DataDome/mobile-package-ios-coredatadome.git", exact: "0.6.0")
     ],
     targets: [
         .target(
