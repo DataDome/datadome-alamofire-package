@@ -1,25 +1,24 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Alamofire",
-        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
-        "state": {
-          "branch": null,
-          "revision": "513364f870f6bfc468f9d2ff0a95caccc10044c5",
-          "version": "5.10.2"
-        }
-      },
-      {
-        "package": "CoreDataDome",
-        "repositoryURL": "git@github.com:DataDome/mobile-package-ios-coredatadome.git",
-        "state": {
-          "branch": null,
-          "revision": "6e6233cf193d00f392668a72066caf979bbaf6a1",
-          "version": "0.6.0"
-        }
+  "originHash" : "2bf8c3fa6a31614e159b410dca82828ae37809009a668d716a283098773bffe9",
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "513364f870f6bfc468f9d2ff0a95caccc10044c5",
+        "version" : "5.10.2"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "mobile-package-ios-coredatadome",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:DataDome/mobile-package-ios-coredatadome.git",
+      "state" : {
+        "branch" : "0.6.1",
+        "revision" : "416f0d020036f080d1c7f36d5c7f16c1ff2a1e30"
+      }
+    }
+  ],
+  "version" : 3
 }

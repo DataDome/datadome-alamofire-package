@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:DataDome/mobile-package-ios-coredatadome.git",
       "state" : {
-        "revision" : "6e6233cf193d00f392668a72066caf979bbaf6a1",
-        "version" : "0.6.0"
+        "branch" : "0.6.1",
+        "revision" : "416f0d020036f080d1c7f36d5c7f16c1ff2a1e30"
       }
     }
   ],
