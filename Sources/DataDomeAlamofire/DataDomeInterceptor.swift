@@ -65,15 +65,16 @@ public final class DataDomeInterceptor: RequestInterceptor, Sendable {
             return
         }
 
-        let body = (request as? DataRequest)?.data
+        let dataRequest = request as? DataRequest
         let headers = httpResponse.allHeaderFields.reduce(into: [String: String]()) { result, pair in
             if let key = pair.key as? String, let value = pair.value as? String {
                 result[key] = value
             }
         }
+        
         let ddResponse = DataDomeResponse(statusCode: httpResponse.statusCode,
                                           headers: headers,
-                                          body: body)
+                                          bodyProvider: { dataRequest?.data })
 
         let dataDome = self.dataDome
         Task {
