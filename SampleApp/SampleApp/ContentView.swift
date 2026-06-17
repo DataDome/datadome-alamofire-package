@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@MainActor
 final class ResquetsViewModel: ObservableObject {
     var networkManager: NetworkManager = .shared
     
@@ -21,10 +22,7 @@ final class ResquetsViewModel: ObservableObject {
     }
     
     func clearDDCookie() {
-        let cookies = HTTPCookieStorage.shared.cookies ?? []
-        for cookie in cookies {
-            HTTPCookieStorage.shared.deleteCookie(cookie)
-        }
+        Task { await networkManager.clearCookies() }
     }
     
     func makeSingleCall(_ id: Int = 0) async {

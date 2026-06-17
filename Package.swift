@@ -1,11 +1,11 @@
-// swift-tools-version:5.3
+// swift-tools-version:6.0
 
 import PackageDescription
 
 let package = Package(
     name: "DataDomeAlamofire",
     platforms: [
-        .iOS(.v11),
+        .iOS(.v15),
     ],
     products: [
         .library(
@@ -15,14 +15,17 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.0.0"),
-        .package(name: "DataDomeSDK", url: "https://github.com/DataDome/datadome-ios-package", from: Version(3, 8, 5))
+        .package(url: "git@github.com:DataDome/mobile-package-ios-coredatadome.git", branch: "0.6.1")
     ],
     targets: [
         .target(
             name: "DataDomeAlamofire",
-            dependencies: ["Alamofire", "DataDomeSDK"],
+            dependencies: [
+                "Alamofire",
+                .product(name: "CoreDataDome", package: "mobile-package-ios-coredatadome")
+            ],
             path: "Sources"
         )
     ],
-    swiftLanguageVersions: [.v5]
+    swiftLanguageModes: [.v6]
 )
