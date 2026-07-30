@@ -2,7 +2,6 @@
 //  DataDomeAlamofire.h
 //  DataDomeAlamofire
 //
-//  Created by Med Hajlaoui on 07/07/2020.
 //  Copyright © 2020 DataDome. All rights reserved.
 //
 
