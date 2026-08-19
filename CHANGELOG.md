@@ -1,6 +1,6 @@
 ## 4.1.0 (2026-08-19)
 
-- The `DataDomeInterceptor` now automatically merge the DataDome cookie with any manually added cookies to a request
+- The `DataDomeInterceptor` now automatically merges the DataDome cookie with any manually added cookies to a request
 
 ## 4.0.0 (2026-08-17)
 
