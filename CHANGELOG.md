@@ -1,12 +1,12 @@
 ## 4.1.0 (2026-08-19)
 
-- The `DataDomeInterceptor` now automatically merges the DataDome cookie with any manually added cookies to a request
+- `DataDomeInterceptor` instances now automatically merge the DataDome cookie with cookies manually added to a request
 
 ## 4.0.0 (2026-08-17)
 
 This SDK is now based on a new internal component. The setup phase has been modified but the usage stays the same.
 
-To migrate from an older version, follow this migration guide -> [https://docs.datadome.co/docs/sdk-ios-alamofire-v4-migration](https://docs.datadome.co/docs/sdk-ios-alamofire-v4-migration "https://docs.datadome.co/docs/sdk-ios-alamofire-v4-migration")​.
+To migrate from an older version, follow [this migration guide](https://docs.datadome.co/docs/sdk-ios-alamofire-v4-migration).
 
 ### Breaking changes
 
@@ -24,4 +24,4 @@ To migrate from an older version, follow this migration guide -> [https://docs.d
 
 ***
 
-For previous versions, refer to [https://docs.datadome.co/update/docs/sdk-ios-changelog](https://docs.datadome.co/update/docs/sdk-ios-changelog "https://docs.datadome.co/update/docs/sdk-ios-changelog").
+For previous versions, refer to [this changelog](https://docs.datadome.co/update/docs/sdk-ios-changelog).
