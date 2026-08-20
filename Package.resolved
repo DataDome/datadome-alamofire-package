@@ -1,5 +1,5 @@
 {
-  "originHash" : "f8d6f37b5b45da834abda43d31708128ee801a9d7404593dd1175a1db7a397fb",
+  "originHash" : "0fad4f60f16d0a251c170d23bb6fcad08cf9f801ba542adc4cfd8592233b6320",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "git@github.com:DataDome/mobile-package-ios-coredatadome.git",
       "state" : {
-        "revision" : "b299741f2e113f247980ff1cd843bdd711498955",
-        "version" : "0.6.1"
+        "revision" : "71905b7ce6815ddaeb6b316597e8df37900c47db",
+        "version" : "1.0.0"
       }
     }
   ],

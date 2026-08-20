@@ -12,7 +12,9 @@ import CoreDataDome
 /// DataDome integration for Alamofire.
 ///
 /// Conforms to Alamofire's `RequestInterceptor` (adapter + retrier):
-/// - `adapt` is a pass-through, leaving the outgoing request untouched.
+/// - `adapt` augments the outgoing request's headers with the DataDome-required headers via the
+///   CoreDataDome SDK's `prepareRequestHeaders(_:forURL:)`, so protected requests carry the
+///   correct DataDome headers up front.
 /// - `retry` validates every failing response through the CoreDataDome SDK. When a request fails
 ///   validation (e.g. a `403` DataDome challenge flagged by Alamofire's `.validate()`), the SDK
 ///   presents the challenge/block page and resolves it; the request is retried only when the SDK
@@ -35,7 +37,9 @@ public final class DataDomeInterceptor: RequestInterceptor, Sendable {
 
     // MARK: - RequestAdapter
 
-    /// Called before the request is fired. The request is forwarded unchanged.
+    /// Called before the request is fired. The request's headers are augmented with the
+    /// DataDome-required headers through the CoreDataDome SDK before it is sent. When the request
+    /// has no URL to scope those headers to, it is forwarded unchanged.
     /// - Parameters:
     ///   - urlRequest: The request about to be sent.
     ///   - session: The session firing the request.
@@ -43,7 +47,20 @@ public final class DataDomeInterceptor: RequestInterceptor, Sendable {
     public func adapt(_ urlRequest: URLRequest,
                       for session: Session,
                       completion: @escaping @Sendable (Result<URLRequest, Error>) -> Void) {
-        completion(.success(urlRequest))
+        guard let url = urlRequest.url else {
+            // No URL to scope the DataDome headers to; forward the request unchanged.
+            completion(.success(urlRequest))
+            return
+        }
+
+        let currentHeaders = urlRequest.allHTTPHeaderFields ?? [:]
+
+        Task {
+            let preparedHeaders = await dataDome.prepareRequestHeaders(currentHeaders, forURL: url)
+            var modifiedRequest = urlRequest
+            modifiedRequest.allHTTPHeaderFields = preparedHeaders
+            completion(.success(modifiedRequest))
+        }
     }
 
     // MARK: - RequestRetrier
