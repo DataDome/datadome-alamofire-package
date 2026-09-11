@@ -1,0 +1,24 @@
+{
+  "originHash" : "5fda99bf045d0f5fadca0ceae20fcf68e7670e1497893903d7b485ed9c737720",
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "7595cbcf59809f9977c5f6378500de2ad73b7ddb",
+        "version" : "5.12.0"
+      }
+    },
+    {
+      "identity" : "datadome-ios-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DataDome/datadome-ios-package",
+      "state" : {
+        "revision" : "4274f1644abb5e642fc25fc1720644088e239322",
+        "version" : "3.8.7"
+      }
+    }
+  ],
+  "version" : 3
+}
