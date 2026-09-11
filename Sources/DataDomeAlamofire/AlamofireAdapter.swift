@@ -116,7 +116,7 @@ extension AlamofireAdapter: FilterDelegate {
         let completion = self.completions[identifier]
         
         // Do not retry the request since it failed with an error
-        completion?(.doNotRetryWithError(error))
+        completion?(.doNotRetry)
     }
     
     /// Called when a captcha is validated. Several requests are queued and need to be retried
