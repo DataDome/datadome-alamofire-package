@@ -1,3 +1,7 @@
+## 4.1.1 (2026-09-14)
+
+- Update dependencies links to HTTPS instead of SSH
+
 ## 4.1.0 (2026-08-19)
 
 - `DataDomeInterceptor` instances now automatically merge the DataDome cookie with cookies manually added to a request
